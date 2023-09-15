@@ -1,0 +1,8 @@
+---
+collectd::install::packages:
+  collectd:
+    ensure: 5.8.1-1.el7
+  collectd-write_prometheus:
+    ensure: present
+  collectd-netlink:
+    ensure: present

@@ -1,0 +1,6 @@
+---
+collectd::config::cfg_dir: /etc/collectd.d
+collectd::config::bin_dir: /opt/puppet/collectd
+collectd::config::cfg: {}
+collectd::config::vmswap_process: '.*'
+collectd::monitoring::consul: false

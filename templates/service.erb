@@ -1,0 +1,20 @@
+# puppet managed
+
+[Unit]
+Description=Collectd statistics daemon
+Documentation=man:collectd(1) man:collectd.conf(5)
+After=syslog.target network.target remote-fs.target nss-lookup.target
+Requires=local-fs.target network-online.target
+
+[Service]
+Type=notify
+ExecStartPre=/usr/sbin/collectd -C /etc/collectd.conf -t
+ExecStart=/usr/sbin/collectd -C /etc/collectd.conf
+Restart=on-failure
+RestartSec=30
+SyslogIdentifier=<%= @module_name %>
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target

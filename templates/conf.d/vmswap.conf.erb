@@ -1,0 +1,13 @@
+<LoadPlugin python>
+    Globals true
+</LoadPlugin>
+<Plugin python>
+    ModulePath "/opt/puppet/collectd"
+    Encoding "utf-8"
+    LogTraces true
+    Interactive false
+    Import "vmswap"
+    <Module vmswap>
+        processes "<%= @vmswap_process %>"
+    </Module>
+</Plugin>

@@ -1,0 +1,4 @@
+---
+collectd::install::packages:
+  collectd:
+    ensure: present

@@ -1,0 +1,11 @@
+LoadPlugin interface
+<Plugin "interface">
+<%- @facts['interfaces'].split(',').each() do |interface| -%>
+    <%-
+    if interface =~ /^(veth|docker|br-)/
+        next
+    end
+    -%>
+    Interface "<%= interface %>"
+<%- end -%>
+</Plugin>

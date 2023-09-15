@@ -1,0 +1,7 @@
+LoadPlugin df
+<Plugin "df">
+    Device "/^(sysfs|proc|devtmpfs|securityfs|devpts)$/"
+    MountPoint "/^\/(run|run\/.*|dev\/.*|sys\/.*)$/"
+    IgnoreSelected true
+    ReportInodes true
+</Plugin>
