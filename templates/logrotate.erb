@@ -1,0 +1,11 @@
+# puppet managed
+/var/log/collectd/*.log {
+    daily
+    missingok
+    notifempty
+    rotate 7
+    compress
+    postrotate
+        /sbin/service collectd reload &>/dev/null
+    endscript
+}

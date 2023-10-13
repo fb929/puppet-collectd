@@ -3,6 +3,7 @@ class collectd::config (
   String $bin_dir,
   Hash $cfg,
   String $vmswap_process,
+  Boolean $syslog_ng,
 ) {
   file {
     "/etc/collectd.conf":
@@ -25,8 +26,17 @@ class collectd::config (
       ],
     ;
   }
-  -> syslog_ng::cfg { $module_name: }
-  -> systemd::unit_file { "${module_name}.service":
+  if $syslog_ng {
+    syslog_ng::cfg { $module_name: }
+    collectd::cfg { "log": order => 01, content => template("${module_name}/conf.d/syslog.conf.erb") }
+  } else {
+    file {
+      "/var/log/collectd/": ensure => directory;
+      "/etc/logrotate.d/collectd": content => template("${module_name}/logrotate.erb");
+    }
+    collectd::cfg { "log": order => 01, content => template("${module_name}/conf.d/logfile.conf.erb") }
+  }
+  systemd::unit_file { "${module_name}.service":
     content => template("${module_name}/service.erb"),
     enable => true,
     active => true,
@@ -34,7 +44,6 @@ class collectd::config (
   -> collectd::cfg {
     "write_prometheus": order => 01, content => template("${module_name}/conf.d/write_prometheus.conf.erb");
     "processes": order => 10, content => template("${module_name}/conf.d/processes.conf.erb");
-    "syslog": order => 10, content => template("${module_name}/conf.d/syslog.conf.erb");
     "netlink": content => template("${module_name}/conf.d/netlink.conf.erb");
     "disk": content => template("${module_name}/conf.d/disk.conf.erb");
     "df": content => template("${module_name}/conf.d/df.conf.erb");

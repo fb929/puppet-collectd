@@ -4,3 +4,4 @@ collectd::config::bin_dir: /opt/puppet/collectd
 collectd::config::cfg: {}
 collectd::config::vmswap_process: '.*'
 collectd::monitoring::consul: false
+collectd::config::syslog_ng: false

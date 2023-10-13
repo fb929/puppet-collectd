@@ -1,7 +1,7 @@
 ---
 collectd::install::packages:
   collectd:
-    ensure: 5.8.1-1.el7
+    ensure: "%{lookup('pkg::collectd')}"
   collectd-write_prometheus:
     ensure: present
   collectd-netlink:
