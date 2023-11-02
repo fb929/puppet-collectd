@@ -5,3 +5,6 @@ collectd::config::cfg: {}
 collectd::config::vmswap_process: '.*'
 collectd::monitoring::consul: false
 collectd::config::syslog_ng: false
+
+collectd::lm_sensors: false
+collectd::rasdaemon: false

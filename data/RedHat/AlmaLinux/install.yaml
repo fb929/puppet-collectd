@@ -5,3 +5,15 @@ collectd::install::packages:
     ensure: "%{lookup('pkg::collectd')}"
   collectd-python:
     ensure: "%{lookup('pkg::collectd')}"
+  collectd-sensors:
+    ensure: "%{lookup('pkg::collectd')}"
+
+collectd::lm_sensors: true
+collectd::rasdaemon: true
+
+collectd::lm_sensors::install::packages:
+  lm_sensors:
+  i2c-tools:
+
+collectd::rasdaemon::install::packages:
+  rasdaemon:
