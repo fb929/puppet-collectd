@@ -13,8 +13,10 @@ ExecStart=/usr/sbin/collectd -C /etc/collectd.conf
 Restart=on-failure
 RestartSec=30
 SyslogIdentifier=<%= @module_name %>
+<%- if @facts['systemd_version'].to_i < 252 -%>
 StandardOutput=syslog
 StandardError=syslog
+<%- end -%>
 
 [Install]
 WantedBy=multi-user.target
