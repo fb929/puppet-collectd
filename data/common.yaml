@@ -3,8 +3,20 @@ collectd::config::cfg_dir: /etc/collectd.d
 collectd::config::bin_dir: /opt/puppet/collectd
 collectd::config::cfg: {}
 collectd::config::vmswap_process: '.*'
-collectd::monitoring::consul: false
 collectd::config::syslog_ng: false
 
 collectd::lm_sensors: false
 collectd::rasdaemon: false
+
+collectd::monitoring::consul: false
+collectd::monitoring::consul_meta: {}
+collectd::monitoring::consul_alerts:
+  collectd:
+    cfg:
+      alert: "%{facts.fqdn} InstanceDown"
+      expr: "up{fqdn='%{facts.fqdn}'} == 0"
+      for: "5m"
+      labels:
+        severity: "critical"
+      annotations:
+        description: "%{facts.fqdn} instance down"
