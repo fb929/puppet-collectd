@@ -13,10 +13,10 @@ collectd::monitoring::consul_meta: {}
 collectd::monitoring::consul_alerts:
   collectd:
     cfg:
-      alert: "%{facts.fqdn} InstanceDown"
-      expr: "up{fqdn='%{facts.fqdn}'} == 0"
+      alert: "%{facts.fqdn} collectd process down"
+      expr: "up{fqdn='%{facts.fqdn}', process_name='collectd'} == 0"
       for: "5m"
       labels:
         severity: "critical"
       annotations:
-        description: "%{facts.fqdn} instance down"
+        description: "%{facts.fqdn} collectd process down"
