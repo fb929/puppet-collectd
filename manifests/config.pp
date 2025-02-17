@@ -49,6 +49,7 @@ class collectd::config (
     "df": content => template("${module_name}/conf.d/df.conf.erb");
     "interface": content => template("${module_name}/conf.d/interface.conf.erb");
     "tcpconns": content => template("${module_name}/conf.d/tcpconns.conf.erb");
+    "protocols": content => template("${module_name}/conf.d/protocols.conf.erb");
   }
   if $facts['memory']['swap'] {
     collectd::cfg { "swap": content => template("${module_name}/conf.d/swap.conf.erb"); }
