@@ -3,7 +3,9 @@
 </LoadPlugin>
 <Plugin python>
     ModulePath "/opt/puppet/collectd"
+<%- if @facts['python_release'].to_i < 3 -%>
     Encoding "utf-8"
+<%- end -%>
     LogTraces true
     Interactive false
     Import "vmswap"
