@@ -2,6 +2,7 @@ LoadPlugin df
 <Plugin "df">
     Device "/^(sysfs|proc|devtmpfs|securityfs|devpts)$/"
     MountPoint "/^\/(run|run\/.*|dev\/.*|sys\/.*)$/"
+    FSType "overlay"
     IgnoreSelected true
     ReportInodes true
 </Plugin>
