@@ -5,6 +5,7 @@ class collectd::config (
   String $vmswap_process,
   Boolean $syslog_ng,
   Boolean $protocols,
+  Boolean $df_enabled,
 ) {
   file {
     "/etc/collectd.conf":
@@ -47,7 +48,7 @@ class collectd::config (
     "processes": order => 10, content => template("${module_name}/conf.d/processes.conf.erb");
     "netlink": content => template("${module_name}/conf.d/netlink.conf.erb");
     "disk": content => template("${module_name}/conf.d/disk.conf.erb");
-    "df": content => template("${module_name}/conf.d/df.conf.erb");
+    "df": ensure => $df_enabled, content => template("${module_name}/conf.d/df.conf.erb");
     "interface": content => template("${module_name}/conf.d/interface.conf.erb");
     "tcpconns": content => template("${module_name}/conf.d/tcpconns.conf.erb");
   }

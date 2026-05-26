@@ -5,6 +5,7 @@ collectd::config::cfg: {}
 collectd::config::vmswap_process: '.*'
 collectd::config::syslog_ng: false
 collectd::config::protocols: false # plugin protocols
+collectd::config::df_enabled: true
 
 collectd::lm_sensors: false
 collectd::rasdaemon: false

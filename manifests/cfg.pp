@@ -20,6 +20,7 @@
 
 define collectd::cfg (
   Integer $order = 50,
+  Boolean $ensure = true,
   Optional[String] $mode = "0644",
   Optional[String] $source = undef,
   Optional[String] $content = undef,
@@ -34,6 +35,7 @@ define collectd::cfg (
   $_order = sprintf("%02d", $order)
 
   file { "${cfg_dir}/${_order}_${name}.conf":
+    ensure => $ensure ? { true => file, default => absent },
     content => $content,
     source => $source,
     mode => $mode,
@@ -43,6 +45,7 @@ define collectd::cfg (
 
   if $source_typesdb or $content_typesdb {
     file { "${cfg_dir}/${name}.db":
+      ensure => $ensure ? { true => file, default => absent },
       content => $content_typesdb,
       source => $source_typesdb,
       mode => $mode,
